@@ -1,0 +1,135 @@
+# Qi Feng (qf2140)
+First REST API returned 
+            You probably want to go either to the content home page or call an API at /api.
+            When you despair during completing the homework, remember that
+            Audentes fortuna iuvat.
+            
+
+
+Test for simple GET:
+Result = 
+{"data": {"G_all": "113", "GS": "87"}, "links": [{"rel": "current", "href": "http://127.0.0.1:5000/api/lahman2017/appearances/willite01_1960_BOS?fields=G_all%2C+GS"}]}
+{
+  "data": {
+    "G_all": "113",
+    "GS": "87"
+  },
+  "links": [
+    {
+      "rel": "current",
+      "href": "http://127.0.0.1:5000/api/lahman2017/appearances/willite01_1960_BOS?fields=G_all%2C+GS"
+    }
+  ]
+}
+
+
+Test for simple GET (with undefined field):
+Result = 
+Internal server error
+Got exception e =  Expecting value: line 1 column 1 (char 0)
+
+
+Test for simple GET (with limit, offset and order_by):
+Result = 
+{"data": "<class 'aeneid.dbservices.DerivedDataTable.DerivedDataTable'>: name = SELECT(lahman2017.people)\nconnect_info = None\nKey columns = None\nNo. of rows = 10\n{'playerID': 'smithbi03', 'nameLast': 'Smith', 'nameFirst': 'Billy'}\n{'playerID': 'smithbi05', 'nameLast': 'Smith', 'nameFirst': 'Billy'}\n{'playerID': 'smithbi06', 'nameLast': 'Smith', 'nameFirst': 'Billy'}\n{'playerID': 'smithbl01', 'nameLast': 'Smith', 'nameFirst': 'Blake'}\n{'playerID': 'smithbo01', 'nameLast': 'Smith', 'nameFirst': 'Bob'}", "links": [{"rel": "current", "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Smith&fields=playerID%2C+nameLast%2C+nameFirst&limit=10&offset=10&order_by=nameFirst"}, {"rel": "next", "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Smith&fields=playerID%2C+nameLast%2C+nameFirst&limit=10&offset=20&order_by=nameFirst"}, {"rel": "previous", "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Smith&fields=playerID%2C+nameLast%2C+nameFirst&limit=10&offset=0&order_by=nameFirst"}]}
+{
+  "data": "<class 'aeneid.dbservices.DerivedDataTable.DerivedDataTable'>: name = SELECT(lahman2017.people)\nconnect_info = None\nKey columns = None\nNo. of rows = 10\n{'playerID': 'smithbi03', 'nameLast': 'Smith', 'nameFirst': 'Billy'}\n{'playerID': 'smithbi05', 'nameLast': 'Smith', 'nameFirst': 'Billy'}\n{'playerID': 'smithbi06', 'nameLast': 'Smith', 'nameFirst': 'Billy'}\n{'playerID': 'smithbl01', 'nameLast': 'Smith', 'nameFirst': 'Blake'}\n{'playerID': 'smithbo01', 'nameLast': 'Smith', 'nameFirst': 'Bob'}",
+  "links": [
+    {
+      "rel": "current",
+      "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Smith&fields=playerID%2C+nameLast%2C+nameFirst&limit=10&offset=10&order_by=nameFirst"
+    },
+    {
+      "rel": "next",
+      "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Smith&fields=playerID%2C+nameLast%2C+nameFirst&limit=10&offset=20&order_by=nameFirst"
+    },
+    {
+      "rel": "previous",
+      "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Smith&fields=playerID%2C+nameLast%2C+nameFirst&limit=10&offset=0&order_by=nameFirst"
+    }
+  ]
+}
+Test for related GET:
+Result = 
+{"data": {"ab": "310", "h": "98"}, "links": [{"rel": "current", "href": "http://127.0.0.1:5000/api/lahman2017/people/willite01/batting?fields=ab%2Ch&yearid=1960"}]}
+{
+  "data": {
+    "ab": "310",
+    "h": "98"
+  },
+  "links": [
+    {
+      "rel": "current",
+      "href": "http://127.0.0.1:5000/api/lahman2017/people/willite01/batting?fields=ab%2Ch&yearid=1960"
+    }
+  ]
+}
+
+
+Test for simple POST:
+Result =
+CREATED
+
+Get the created entry
+Result =
+{
+    "data": {
+        "nameLast": "Ferguson",
+        "nameFirst": "Donald",
+        "birthMonth": null,
+        "birthYear": null
+    },
+    "links": [
+              {
+              "rel": "current",
+              "href": "http://127.0.0.1:5000/api/lahman2017/people?nameLast=Ferguson&fields=playerID,birthMonth,birthYear"
+              }
+              ]
+}
+
+
+Test for simple DELETE:
+Result =
+OK.
+
+Check whether the entry has been deleted:
+Result =
+Internal server error
+Got exception e =  Expecting value: line 1 column 1 (char 0)
+
+
+Test for simple DELETE (if entry DNE):
+Result =
+NOT FOUND.
+
+
+Test for related POST:
+Result =
+CREATED
+
+Get the created entry:
+Result =
+{
+    "data": {
+        "yearID": "2020",
+        "teamID": "BOS",
+        "playerID": "willite01",
+        "stint": "1",
+        "AB": "1000"
+    },
+    "links": [
+              {
+              "rel": "current",
+              "href": "http://127.0.0.1:5000/api/lahman2017/batting?H=1000&fields=yearID,teamID,playerID,stint,AB"
+              }
+              ]
+}
+
+
+Create entry for simple UPDATE:
+Result =
+CREATED
+After update result =
+UPDATED
+
+
